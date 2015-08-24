@@ -48,3 +48,19 @@ a:link{
   color:#0077ff;
 }
 
+td {
+  text-align:center;
+}
+
+.hover{
+  font-family:impact;
+  font-size:24px;
+  width:100px;
+  height:30px;
+  text-align:center;
+  background-color:#0dd;
+  border:solid 3px black;
+  margin-left:30px;
+  margin-right:30px;
+  margin-top:50px;;
+}

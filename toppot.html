@@ -36,7 +36,7 @@
       </nav>
     </header>
 
-    <section>
+    <section class="about">
       <a name="About"></a>
       <h1>About us:</h1>
         <p>
@@ -60,137 +60,31 @@
       <a name="Report"></a>
       <h1>Sample Report:</h1>
       <table>
-        <tr id="tabletop">
-          <th>Hour\Location</th>
-          <th>Downtown</th>
-          <th>Capitol Hill</th>
-          <th>South Lake Union</th>
-          <th>Wedgewood</th>
-          <th>Ballard</th>
-        </tr>
-        <tr>
-          <th>5am - 6am</th>
-          <td>193</td>
-          <td>47</td>
-          <td>137</td>
-          <td>14</td>
-          <td>101</td>
-        </tr>
-        <tr>
-          <th>6am - 7am</th>
-          <td>47</td>
-          <td>38</td>
-          <td>99</td>
-          <td>27</td>
-          <td>41</td>
-        </tr>
-        <tr>
-          <th>7am - 8am</th>
-          <td>166</td>
-          <td>27</td>
-          <td>88</td>
-          <td>12</td>
-          <td>60</td>
-        </tr>
-        <tr>
-          <th>8am - 9am</th>
-          <td>40</td>
-          <td>63</td>
-          <td>97</td>
-          <td>22</td>
-          <td>190</td>
-        </tr>
-        <tr>
-          <th>9am - 10am</th>
-          <td>57</td>
-          <td>11</td>
-          <td>122</td>
-          <td>8</td>
-          <td>47</td>
-        </tr>
-        <tr>
-          <th>10am - 11am</th>
-          <td>101</td>
-          <td>60</td>
-          <td>91</td>
-          <td>22</td>
-          <td>101</td>
-        </tr>
-        <tr>
-          <th>11am - 12pm</th>
-          <td>123</td>
-          <td>14</td>
-          <td>119</td>
-          <td>7</td>
-          <td>208</td>
-        </tr>
-        <tr>
-          <th>12pm - 1pm</th>
-          <td>62</td>
-          <td>12</td>
-          <td>99</td>
-          <td>10</td>
-          <td>209</td>
-        </tr>
-        <tr>
-          <th>1pm - 2pm</th>
-          <td>133</td>
-          <td>25</td>
-          <td>102</td>
-          <td>19</td>
-          <td>105</td>
-        </tr>
-        <tr>
-          <th>2pm - 3pm</th>
-          <td>136</td>
-          <td>57</td>
-          <td>134</td>
-          <td>23</td>
-          <td>138</td>
-        </tr>
-        <tr>
-          <th>3pm - 4pm</th>
-          <td>73</td>
-          <td>58</td>
-          <td>77</td>
-          <td>24</td>
-          <td>162</td>
-        </tr>
-        <tr>
-          <th>4pm - 5pm</th>
-          <td>162</td>
-          <td>14</td>
-          <td>88</td>
-          <td>34</td>
-          <td>93</td>
-        </tr>
-        <tr>
-          <th>Total</th>
-          <td>1293</td>
-          <td>426</td>
-          <td>1253</td>
-          <td>222</td>
-          <td>1455</td>
-        </tr>
-        <tr>
-          <th>Average Donuts per Hour</th>
-          <td>107.75</td>
-          <td>35.5</td>
-          <td>104.42</td>
-          <td>18.5</td>
-          <td>121.25</td>
-        </tr>
+        <tbody class="Report">
+          <tr id="tabletop">
+            <th>Location\Hour</th>
+            <th>5am</th>
+            <th>6am</th>
+            <th>7am</th>
+            <th>8am</th>
+            <th>9am</th>
+            <th>10am</th>
+            <th>11am</th>
+            <th>12pm</th>
+            <th>1pm</th>
+            <th>2pm</th>
+            <th>3pm</th>
+            <th>4pm</th>
+            <th>Total Per Day</th>
+            <th>Average donuts Per Hour</th>
+          </tr>
+        </tbody>
       </table>
     </section>
 
-    <section>
+    <section class="Location">
       <a name="Locations"></a>
       <h1>Locations:</h1>
-      <p><b>Downtown:</b> 720 3rd Ave Suite 100, Seattle</p>
-      <p><b>Capitol Hill:</b> 1206 Madison St, Seattle</p>
-      <p><b>South Lake Union:</b> 590 Terry Ave N, Seattle</p>
-      <p><b>Wedgewood:</b> 6855 35th Ave NE Seattle</p>
-      <p><b>Ballard:</b> 1416 Northwest 46th Street #102, Seattle</p>
     </section>
 
     <section>
@@ -200,58 +94,68 @@
       <p><b>Email:</b> fakedonuts@phonydonutsite.com</p>
     </section>
 
+    <script src="http://code.jquery.com/jquery-1.11.3.js"></script>
     <script>
       var DonutMaster = function(){
         this.donutShops = [];
-        this.addShop = function(toppotshop){
-          this.donutShops.push(toppotshop);
+        this.addShop = function( toppotshop ){
+          this.donutShops.push( toppotshop );
         };
         this.generateReport = function(){
+          //i used string concatenation because appending <tr> tag would automatically add a closing tag
           for( var index = 0; index < this.donutShops.length; index++ ){
-            console.log("Location:" + this.donutShops[index].location);
-            console.log("Donuts Per Hour:" + this.donutShops[index].getDonutsPerHour());
-            console.log("Donuts Per Day:" + this.donutShops[index].getDonutsPerDay());
+            var table="";
+            table += "<tr class=\"" + this.donutShops[index].location + "\">";
+            table += "<th class=\"" + this.donutShops[index].location.toLowerCase() + "\">" + this.donutShops[index].location + "</th>";
+            for (var index2 = 0; index2 < this.donutShops[index].donutsPerHour.length; index2++ ){
+              table += "<td style=\"display: none\">" + this.donutShops[index].donutsPerHour[index2] + "</td>";
+            }
+            table += "<td style=\"display: none\">" + this.donutShops[index].getDonutsPerDay() + "</td>";
+            table += "<td style=\"display: none\">" + Math.round( this.donutShops[index].getDonutsPerDay() / ( this.donutShops[index].close - this.donutShops[index].open ) ) + "</td>";
+            table += "</td>";
+            $( ".Report" ).append( table );
+          }
+        };
+        this.generateLocation = function(){
+          for( var index = 0; index < this.donutShops.length; index++ ){
+            $( ".Location" ).append( "<p><b>" + this.donutShops[index].location + ":</b> " + this.donutShops[index].address + "</p>" );
           }
         };
       };
 
-      var TopPot = function( location, minph, maxph, avgpc ){
+      var TopPot = function( location, minph, maxph, avgpc, address ){
         this.location = location;
         this.minCustomerPerHour = minph;
         this.maxCustomerPerHour = maxph;
         this.avgDonutsPerCustomer = avgpc;
         this.open = 5;
         this.close = 17;
-        this.hourRange = maxph - minph;
+        this.customerRange = maxph - minph;
+        this.address = address;
+        this.donutsPerHour = [];
         this.getDonutsPerHour = function(){
-          var randomCustomerCount = Math.random() * this.hourRange + this.minCustomerPerHour;
-          return Math.floor(randomCustomerCount * this.avgDonutsPerCustomer)+1;
+          var randomCustomerCount;
+          for( var index = 0; index < ( this.close - this.open ); index++ ){
+            randomCustomerCount = Math.random() * this.customerRange + this.minCustomerPerHour;
+            this.donutsPerHour.push( Math.floor( randomCustomerCount * this.avgDonutsPerCustomer ) + 1);
+          }
+          return this.donutsPerHour;
         };
         this.getDonutsPerDay = function (){
           var dayDonuts = 0;
-          for( var index = 0; index < (this.close - this.open); index++ ){
-            dayDonuts += this.getDonutsPerHour();
+          for( var index = 0; index < this.donutsPerHour.length; index++ ){
+            dayDonuts += this.donutsPerHour[index];
           }
           return dayDonuts;
         };
+        this.getDonutsPerHour();
       };
 
-      /*function printPerHour( store ){
-        var current;
-        for ( var index = 0; index < (store.close - store.open); index++ ){
-          current = store.open + index;
-          console.log("From hour " + current + " to " + (current + 1) + ", you will need " + store.getDonutsPerHour() + " donuts at the " + store.location + " Top Pot");
-        }
-      }
-      function printPerDay( store ){
-        console.log("You will need " + store.getDonutsPerDay() + " donuts for the day at the " + store.location + " Top Pot");
-      }*/
-
-      var downtown = new TopPot( "Downtown", 8, 43, 4.5 ),
-          caphill = new TopPot( "Capitol Hill", 4, 37, 2 ),
-          slu = new TopPot( "South Lake Union", 9, 23, 6.33 ),
-          wedgewood = new TopPot( "Wedgewood", 2, 28, 1.25 ),
-          ballard = new TopPot( "Ballard", 8, 58, 3.75 );
+      var downtown = new TopPot( "Downtown", 8, 43, 4.5, "720 3rd Ave Suite 100, Seattle" ),
+          caphill = new TopPot( "Capitol Hill", 4, 37, 2, "1206 Madison St, Seattle" ),
+          slu = new TopPot( "South Lake Union", 9, 23, 6.33, "590 Terry Ave N, Seattle" ),
+          wedgewood = new TopPot( "Wedgewood", 2, 28, 1.25, "6855 35th Ave NE Seattle"),
+          ballard = new TopPot( "Ballard", 8, 58, 3.75, "1416 Northwest 46th Street #102, Seattle" );
 
       var donutMaster = new DonutMaster();
       donutMaster.addShop(downtown);
@@ -260,6 +164,19 @@
       donutMaster.addShop(wedgewood);
       donutMaster.addShop(ballard);
       donutMaster.generateReport();
+      donutMaster.generateLocation();
+      $( "tr > th" ).click(function(){
+        $( this ).nextAll( "td" ).fadeToggle(2000);
+      });
+      $( "article" ).hover(
+        function() {
+          $( this ).addClass( "hover" );
+        },
+        function() {
+          $( this ).removeClass( "hover" );
+        }
+      );
+
     </script>
   </body>
 </html>
