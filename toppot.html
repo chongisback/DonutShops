@@ -165,9 +165,11 @@
       donutMaster.addShop(ballard);
       donutMaster.generateReport();
       donutMaster.generateLocation();
+      //toggles on and off for data in the table when you click on the location
       $( "tr > th" ).click(function(){
         $( this ).nextAll( "td" ).fadeToggle(2000);
       });
+      //changes color of navigation
       $( "article" ).hover(
         function() {
           $( this ).addClass( "hover" );
