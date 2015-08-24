@@ -59,22 +59,22 @@
     <section>
       <a name="Report"></a>
       <h1>Sample Report:</h1>
-      <table>
+      <table border = "1">
         <tbody class="Report">
           <tr id="tabletop">
             <th>Location\Hour</th>
-            <th>5am</th>
-            <th>6am</th>
-            <th>7am</th>
-            <th>8am</th>
-            <th>9am</th>
-            <th>10am</th>
-            <th>11am</th>
-            <th>12pm</th>
-            <th>1pm</th>
-            <th>2pm</th>
-            <th>3pm</th>
-            <th>4pm</th>
+            <th>5AM</th>
+            <th>6AM</th>
+            <th>7AM</th>
+            <th>8AM</th>
+            <th>9AM</th>
+            <th>10AM</th>
+            <th>11AM</th>
+            <th>12PM</th>
+            <th>1PM</th>
+            <th>2PM</th>
+            <th>3PM</th>
+            <th>4PM</th>
             <th>Total Per Day</th>
             <th>Average donuts Per Hour</th>
           </tr>
@@ -102,7 +102,8 @@
           this.donutShops.push( toppotshop );
         };
         this.generateReport = function(){
-          //i used string concatenation because appending <tr> tag would automatically add a closing tag
+          //Used string concatenation because appending <tr> tag would automatically add a closing tag
+          //then it uses append
           for( var index = 0; index < this.donutShops.length; index++ ){
             var table="";
             table += "<tr class=\"" + this.donutShops[index].location + "\">";
