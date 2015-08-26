@@ -14,7 +14,7 @@
           </li>
           <li>
             <article>
-              <a href="#Pictures">Pictures</a>
+              <a href="#Game">Game</a>
             </article>
           </li>
           <li>
@@ -45,15 +45,10 @@
         </p>
     </section>
 
-    <section>
-      <a name="Pictures"></a>
-      <h1>Pictures:</h1>
-      <img src="http://www.kumandgo.com/content/uploads/2013/05/Donuts.jpg"/>
-      <img src="http://www.kumandgo.com/content/uploads/2013/05/Donuts.jpg"/>
-      <img src="http://www.kumandgo.com/content/uploads/2013/05/Donuts.jpg"/>
-      <img src="http://www.kumandgo.com/content/uploads/2013/05/Donuts.jpg"/>
-      <img src="http://www.kumandgo.com/content/uploads/2013/05/Donuts.jpg"/>
-      <img src="http://www.kumandgo.com/content/uploads/2013/05/Donuts.jpg"/>
+    <section class="gameboard">
+      <a name="Game"></a>
+      <h1>Game:</h1>
+      <p>Direction: Eat[click] 25 donuts fast as you can!</p>
     </section>
 
     <section>
@@ -147,6 +142,7 @@
           var average=Math.round( this.getDonutsPerDay() / ( this.close - this.open ));
           table += "<tr>";
           table += "<th>" + this.location + "</th>";
+          //table data for the per hour
           for (var index = 0; index < this.donutsPerHour.length; index++ ){
             table += "<td style=\"display: none\">" + this.donutsPerHour[index] + "</td>";
           }
@@ -172,8 +168,9 @@
       donutMaster.addShop(ballard);
       donutMaster.generateReport();
       donutMaster.generateLocation();
+
       //toggles on and off for data in the table when you click on the location
-      $( "tr > th" ).click(function(){
+      $( "tr > th" ).on("click", function(){
         $( this ).nextAll( "td" ).fadeToggle(2000);
       });
       //changes color of navigation
@@ -186,6 +183,39 @@
         }
       );
 
+      //gameboard creator
+      var loadDonuts = function(){
+        var gameboard = "";
+        gameboard += "<section class=\"gameResult\">";
+        for ( var index = 0; index < 25; index++ ){
+          gameboard += "<article>";
+          gameboard += "<img class=\"game\" src=\"http://a.deviantart.net/avatars/d/i/diyismybae.gif?4\"/>";
+          gameboard += "</article>";
+        }
+        gameboard += "</section>";
+        $( ".gameboard" ).append( gameboard );
+      };
+      loadDonuts();
+      //resets the board if button "play again!" is clicked
+      $( "body" ).on( "click", ":button", function() {
+        loadDonuts();
+        $( this ).parent().remove();
+        $( this ).remove();
+      });
+      //calculates time and reports.
+      var last, first, diff;
+      $( "body" ).on( "click", ".game", function( event ) {
+        if($( ".game" ).length === 25){
+          first = event.timeStamp;
+        }
+        $ ( this ).remove();
+        if($( ".game" ).length === 0){
+          last = event.timeStamp;
+          diff = ( last - first )/1000;
+          $( ".gameResult" ).append( "<p class=\"result\">It took you " + diff + " seconds!</p>" );
+          $( ".gameResult" ).append( "<button type=\"button\">Play Again!</button>" );
+        }
+      });
     </script>
   </body>
 </html>
