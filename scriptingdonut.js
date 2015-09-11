@@ -14,7 +14,7 @@ var DonutMaster = function(){
         ":</b> " + this.donutShops[index].address + "</p>" );
     }
   };
-};
+};//test
 
 var TopPot = function( location, minph, maxph, avgpc, address ){
   this.location = location;
